@@ -13,6 +13,6 @@ const userSchema = new Schema({
     }
 });
 
-userSchema.plugin(passportMongoose, { usenameField: 'email' });
+userSchema.plugin(passportMongoose, { usernameField: 'email' });
 
 module.exports = model('User', userSchema);
