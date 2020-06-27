@@ -23,7 +23,7 @@ exports.getById = async (req, res) => {
 
 exports.getDevices = async (req, res) => {
   const getDevices = await Devices.find();
-  
+
   res.json({ ok: true, getDevices });
 };
 
@@ -38,12 +38,15 @@ exports.updateDevice = async (req, res) => {
     state
   };
 
-  const updatedDevice = await Devices.findByIdAndUpdate(id, data, { new: true });
+  const updatedDevice = await Devices.findByIdAndUpdate(id, data, {
+    new: true
+  });
   res.json({ ok: true, updatedDevice });
 };
 
 exports.deleteDevice = async (req, res) => {
-  const { id } = req.body;
+  const { id } = req.params;
+
   await Devices.findByIdAndDelete(id);
   res.json({ ok: true, msg: 'Device deleted' });
 };

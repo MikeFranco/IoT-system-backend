@@ -14,7 +14,7 @@ router.post('/device', devicePost);
 
 router.put('/device', updateDevice);
 
-router.delete('/device', deleteDevice);
+router.delete('/device/:id', deleteDevice);
 
 router.get('/get-one-device/:id', getById);
 

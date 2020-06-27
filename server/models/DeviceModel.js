@@ -20,6 +20,9 @@ const deviceSchema = new Schema({
     type: Object,
     required: true
   }
+},{
+  timestamps: true,
+  versionKey: false
 });
 
 module.exports = model('Devices', deviceSchema);
