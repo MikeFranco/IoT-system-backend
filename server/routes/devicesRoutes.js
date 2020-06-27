@@ -4,7 +4,9 @@ const {
   getById,
   getDevices,
   updateDevice,
-  deleteDevice
+  updateDeviceState,
+  deleteDevice,
+  toggleTurnOff
 } = require('../controllers/DevicesControllers');
 const router = express.Router();
 
@@ -18,5 +20,8 @@ router.delete('/device/:id', deleteDevice);
 
 router.get('/get-one-device/:id', getById);
 
+router.put('/update-state', updateDeviceState);
+
+router.put('/toggle-turn-off', toggleTurnOff);
 
 module.exports = router;

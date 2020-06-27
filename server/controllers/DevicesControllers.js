@@ -28,10 +28,10 @@ exports.getDevices = async (req, res) => {
 };
 
 exports.updateDevice = async (req, res) => {
-  const { idLocal, id, type, label, manufacturer, state } = req.body;
+  const { id, type, label, manufacturer, state } = req.body;
 
   const data = {
-    id: idLocal,
+    id,
     type,
     label,
     manufacturer,
@@ -42,6 +42,36 @@ exports.updateDevice = async (req, res) => {
     new: true
   });
   res.json({ ok: true, updatedDevice });
+};
+
+exports.updateDeviceState = async (req, res) => {
+  const { id, deviceState } = req.body;
+
+  const data = {
+    id,
+    state: deviceState
+  };
+
+  const updatedDeviceState = await Devices.findByIdAndUpdate(id, data, {
+    new: true
+  });
+  res.json({ ok: true, updatedDeviceState });
+};
+
+exports.toggleTurnOff = async (req, res) => {
+  const { id, turnOnValue } = req.body;
+
+  const data = {
+    id,
+    state: {
+      turnedOn: turnOnValue
+    }
+  };
+
+  const toggleTurnedOff = await Devices.findByIdAndUpdate(id, data, {
+    new: true
+  });
+  res.json({ ok: true, toggleTurnedOff });
 };
 
 exports.deleteDevice = async (req, res) => {

@@ -7,6 +7,10 @@ const cors = require('cors');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 
+//routes
+const auth = require('./routes/authRoutes.js');
+const devices = require('./routes/devicesRoutes');
+
 app.use(function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
   res.header(
@@ -54,8 +58,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(cookieParser());
 
-const auth = require('./routes/authRoutes.js');
-const devices = require('./routes/devicesRoutes');
 app.use('/', auth);
 app.use('/', devices);
 
