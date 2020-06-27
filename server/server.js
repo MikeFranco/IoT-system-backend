@@ -19,6 +19,7 @@ app.use(function (req, res, next) {
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
 app.use(
   cors({
     credentials: true
@@ -54,7 +55,9 @@ app.use(passport.session());
 app.use(cookieParser());
 
 const auth = require('./routes/authRoutes.js');
+const devices = require('./routes/devicesRoutes');
 app.use('/', auth);
+app.use('/', devices);
 
 app.listen(port, () => {
   console.log(`corriendo en el puerto ${port}`);

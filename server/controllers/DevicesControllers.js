@@ -1,49 +1,49 @@
 const Devices = require('../models/DeviceModel.js');
 
-exports.devicePost = async (req,res) => {
-    const {id, type, label, manufacter, state } = req.body;
+exports.devicePost = async (req, res) => {
+  const { id, type, label, manufacturer, state } = req.body.device;
 
-    const data = {
-        id,
-        type,
-        label,
-        manufacter,
-        state
-    }
-    const createIot = await Devices.create(data)
-    res.json({ok: true, createIot})
-}
+  const data = {
+    id,
+    type,
+    label,
+    manufacturer,
+    state
+  };
+  const createDevice = await Devices.create(data);
+  res.json({ ok: true, createDevice });
+};
 
 exports.getById = async (req, res) => {
-    const {id} = req.params;
-    
-    const getById = await Devices.findById(id);
-    res.json({ok: true, getById});
-}
+  const { id } = req.body;
 
-exports.getDevice = async (req, res) => {
-    const getDevice = await Devices.find();
-    res.json({ok: true, getDevice});
-}
+  const getById = await Devices.findById(id);
+  res.json({ ok: true, getById });
+};
 
-exports.updateIot = async (req, res) => {
-    const {id} = req.params;
-    const {idLocal, type, label, manufacter, state } = req.body;
+exports.getDevices = async (req, res) => {
+  const getDevices = await Devices.find();
+  
+  res.json({ ok: true, getDevices });
+};
 
-    const data = {
-        id: idLocal,
-        type,
-        label,
-        manufacter,
-        state
-    }
+exports.updateDevice = async (req, res) => {
+  const { idLocal, id, type, label, manufacturer, state } = req.body;
 
-    const updatedIot = await Devices.findByIdAndUpdate(id, data, {new: true});
-    res.json({ok: true, updatedIot})
-}
+  const data = {
+    id: idLocal,
+    type,
+    label,
+    manufacturer,
+    state
+  };
 
-exports.deleteIot = async (req, res) => {
-    const {id} = req.params;
-    await Devices.findByIdAndDelete(id);
-    res.json({ok: true, msg:'Device deleted'})
-}
+  const updatedDevice = await Devices.findByIdAndUpdate(id, data, { new: true });
+  res.json({ ok: true, updatedDevice });
+};
+
+exports.deleteDevice = async (req, res) => {
+  const { id } = req.body;
+  await Devices.findByIdAndDelete(id);
+  res.json({ ok: true, msg: 'Device deleted' });
+};

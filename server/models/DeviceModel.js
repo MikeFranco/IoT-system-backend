@@ -2,8 +2,7 @@ const { model, Schema } = require('mongoose');
 
 const deviceSchema = new Schema({
   id: {
-    type: String,
-    required: true
+    type: String
   },
   type: {
     type: String,
@@ -13,7 +12,7 @@ const deviceSchema = new Schema({
     type: String,
     required: true
   },
-  manufacter: {
+  manufacturer: {
     type: String,
     required: true
   },
