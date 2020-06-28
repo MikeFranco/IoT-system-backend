@@ -19,6 +19,9 @@ const deviceSchema = new Schema({
   state: {
     type: Object,
     required: true
+  },
+  userId: {
+    type: String,
   }
 },{
   timestamps: true,

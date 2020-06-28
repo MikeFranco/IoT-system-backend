@@ -1,14 +1,15 @@
 const Devices = require('../models/DeviceModel.js');
 
 exports.devicePost = async (req, res) => {
-  const { id, type, label, manufacturer, state } = req.body.device;
+  const { id, type, label, manufacturer, state, userId } = req.body.device;
 
   const data = {
     id,
     type,
     label,
     manufacturer,
-    state
+    state,
+    userId
   };
   const createDevice = await Devices.create(data);
   res.json({ ok: true, createDevice });
@@ -22,23 +23,25 @@ exports.getById = async (req, res) => {
 };
 
 exports.getDevices = async (req, res) => {
-  const getDevices = await Devices.find();
+  const { userId } = req.query;
+
+  const getDevices = await Devices.find({userId});
 
   res.json({ ok: true, getDevices });
 };
 
 exports.updateDevice = async (req, res) => {
-  const { id, type, label, manufacturer, state } = req.body;
+  const { _id, type, label, manufacturer, state } = req.body.newDeviceInfo;
 
   const data = {
-    id,
+    _id,
     type,
     label,
     manufacturer,
     state
   };
 
-  const updatedDevice = await Devices.findByIdAndUpdate(id, data, {
+  const updatedDevice = await Devices.findByIdAndUpdate(_id, data, {
     new: true
   });
   res.json({ ok: true, updatedDevice });
