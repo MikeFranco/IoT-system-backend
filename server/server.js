@@ -11,6 +11,9 @@ const cookieParser = require('cookie-parser');
 const auth = require('./routes/authRoutes.js');
 const devices = require('./routes/devicesRoutes');
 
+const SESSION_SECRET = process.env.SECRET;
+const port = process.env.PORT || 5000;
+
 app.use(function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
   res.header(
@@ -32,14 +35,12 @@ app.use(
 
 app.use(
   session({
-      resave: false,
-      saveUninitialized: true,
-      secret: 'perritoShihuahua',
-      cookie: { maxAge: 1000 * 60 * 60 }
+    resave: false,
+    saveUninitialized: true,
+    secret: SESSION_SECRET,
+    cookie: { maxAge: 1000 * 60 * 60 }
   })
 );
-
-const port = process.env.PORT || 5000;
 
 mongoose.connect(
   process.env.DB,

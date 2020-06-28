@@ -26,3 +26,4 @@ $ yarn install
 # Serve with hot reload at localhost:3000
 $ yarn dev
 ```
+# Don't forget to add the ***.env*** file in the root of the folder, request it via email at: mfranco_98@yahoo.com
